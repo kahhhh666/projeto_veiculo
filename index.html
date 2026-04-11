@@ -1,13 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="Js/script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Cadastro de Veículos</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <p>c</p>
+
+<div class="container">
+
+    <div class="card">
+        <h1>Cadastro de Veículos</h1>
+
+        <form id="formVeiculo">
+
+         
+            <input type="text" id="modelo" placeholder="Modelo" required>
+
+       
+            <input type="text" id="marca" placeholder="Marca" required>
+
+            <input type="text" id="placa" placeholder="Placa" required>
+
+         
+            <input type="number" id="ano" placeholder="Ano de fabricação" required>
+
+       
+            <input type="number" id="valor" placeholder="Valor do veículo" required>
+
+           
+            <div class="radio-group">
+
+                <label>
+                    <input type="radio" name="combustivel" value="gasolina" required>
+                    Gasolina
+                </label>
+
+                <label>
+                    <input type="radio" name="combustivel" value="etanol">
+                    Etanol
+                </label>
+
+                <label>
+                    <input type="radio" name="combustivel" value="bicombustivel">
+                    Bicombustível
+                </label>
+
+                <label>
+                    <input type="radio" name="combustivel" value="hibrido">
+                    Híbrido
+                </label>
+
+                <label>
+                    <input type="radio" name="combustivel" value="eletrico">
+                    Elétrico
+                </label>
+            </div>
+
+        
+            <button type="submit">Adicionar</button>
+
+        </form>
+    </div>
+
+    <!-- LISTA -->
+    <div class="lista" id="listaVeiculos">
+        <!-- JS vai inserir aqui -->
+    </div>
+
+</div>
+
 </body>
 </html>
