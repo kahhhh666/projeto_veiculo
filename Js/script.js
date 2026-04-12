@@ -29,3 +29,10 @@ const taxas = {
     hibrido: 0.08,
     eletrico: 0.02
 }
+
+const taxa = taxas[combustivel] || 0;
+
+//calculo taxa de seguro do veiculo
+
+const seguro = valor * 0.1
+
