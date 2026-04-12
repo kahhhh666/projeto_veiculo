@@ -12,7 +12,8 @@ function adicionarVeiculo() {
     const modelo = document.getElementById("modelo").value
     const marca = document.getElementById("marca").value
     const placa = document.getElementById("placa").value
-    const ano = parseInt(document.getElementById("ano").value)
+    const data = document.getElementById("ano").value
+    const ano = new Date(data).getFullYear()
     const valor = parseFloat(document.getElementById("valor").value)
     const cor = document.getElementById("cor").value
 
@@ -47,6 +48,7 @@ function adicionarVeiculo() {
 
     if (idade_carro >= 20) {
         ipvaTexto = "Isento"
+        item.classList.add("isento")
     } else {
         const taxa = taxas[combustivel] || 0;
         ipva = valor * taxa
