@@ -51,11 +51,11 @@ function adicionarVeiculo() {
 
     // taxas dos combustiveis
     const taxas = {
-        gasolina: 0.04,
-        etanol: 0.03,
-        bicombustivel: 0.035,
-        hibrido: 0.02,
-        eletrico: 0.01
+        gasolina: 0.20,
+        etanol: 0.15,
+        bicombustivel: 0.10,
+        hibrido: 0.08,
+        eletrico: 0.02
     };
 
     // calculo do seguro
@@ -95,16 +95,16 @@ function adicionarVeiculo() {
         <p><strong>Cor:</strong> ${cor}</p>
 
         <p><strong>Seguro:</strong> ${seguro.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })}</p>
+        style: "currency",
+        currency: "BRL"
+    })}</p>
 
         <p><strong>IPVA:</strong> ${ipvaTexto}</p>
 
         <p><strong>Total:</strong> ${total.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })}</p>
+        style: "currency",
+        currency: "BRL"
+    })}</p>
 
         <button class="remover">Excluir</button>
     `;
