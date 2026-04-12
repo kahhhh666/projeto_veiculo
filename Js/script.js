@@ -12,8 +12,12 @@ function adicionarVeiculo() {
     const modelo = document.getElementById("modelo").value
     const marca = document.getElementById("marca").value
     const placa = document.getElementById("placa").value
+
+   //correção data input
     const data = document.getElementById("ano").value
     const ano = new Date(data).getFullYear()
+    //
+    
     const valor = parseFloat(document.getElementById("valor").value)
     const cor = document.getElementById("cor").value
 
