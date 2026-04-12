@@ -91,7 +91,7 @@ function adicionarVeiculo() {
         <p><strong>Placa:</strong> ${placa}</p>
         <p><strong>Modelo:</strong> ${modelo}</p>
         <p><strong>Marca:</strong> ${marca}</p>
-        <p><strong>Ano:</strong> ${ano}</p>
+        <p><strong>Idade do Veículo:</strong> ${idade_carro}</p>
         <p><strong>Cor:</strong> ${cor}</p>
 
         <p><strong>Seguro:</strong> ${seguro.toLocaleString("pt-BR", {
