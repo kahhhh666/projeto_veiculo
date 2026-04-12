@@ -1,70 +1,91 @@
+// GARANTE QUE O HTML CARREGOU
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.querySelector("#formVeiculo");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // validação do formulário
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        adicionarVeiculo();
+    });
+
+});
+
+
+//  FUNÇÃO PRINCIPAL
 function adicionarVeiculo() {
 
-    // Indentificando elementos do html FORM e div LISTAGEM DE VEICULOS 
-    const form = document.querySelector("#formVeiculo")
-    const lista = document.querySelector("#listaVeiculos")
-    const item = document.createElement("div")
-    item.classList.add("item")
+    const form = document.querySelector("#formVeiculo");
+    const lista = document.querySelector("#listaVeiculos");
 
+    const item = document.createElement("div");
+    item.classList.add("item");
 
-    //pegando Valores do HTML
+    // pegando valores do html
+    const modelo = document.getElementById("modelo").value;
+    const marca = document.getElementById("marca").value;
+    const placa = document.getElementById("placa").value;
 
-    const modelo = document.getElementById("modelo").value
-    const marca = document.getElementById("marca").value
-    const placa = document.getElementById("placa").value
+    // data (type="date") coleta do dado
+    const data = document.getElementById("ano").value;
+    if (!data) return;
 
-   //correção data input
-    const data = document.getElementById("ano").value
-    const ano = new Date(data).getFullYear()
-    //
-    
-    const valor = parseFloat(document.getElementById("valor").value)
-    const cor = document.getElementById("cor").value
+    const ano = new Date(data).getFullYear();
 
-    //pegando seleção de combustivel
+    const valor = parseFloat(document.getElementById("valor").value);
+    const cor = document.getElementById("cor").value;
 
-    const combustivel = document.querySelector('input[name="combustivel"]:checked')?.value || "Não informado"
+    const combustivel = document.querySelector('input[name="combustivel"]:checked')?.value;
 
-    //definição das TAXAS dos combustiveis
-
-    const taxas = {
-        gasolina: 0.2,
-        etanol: 0.15,
-        bicombustivel: 0.1,
-        hibrido: 0.08,
-        eletrico: 0.02
+    // segurança extra
+    if (!combustivel) {
+        alert("Selecione um combustível!");
+        return;
     }
 
+    // taxas dos combustiveis
+    const taxas = {
+        gasolina: 0.04,
+        etanol: 0.03,
+        bicombustivel: 0.035,
+        hibrido: 0.02,
+        eletrico: 0.01
+    };
 
+    // calculo do seguro
+    const seguro = valor * 0.1;
 
-    //calculo taxa de seguro do veiculo
+    // calculo da idade do carro
+    const anoAtual = new Date().getFullYear();
+    const idade_carro = anoAtual - ano;
 
-    const seguro = valor * 0.1
+    let ipva = 0;
+    let ipvaTexto = "";
 
-    //Final / calculo idade e IPVA
-
-    const anoAtual = new Date().getFullYear()
-    const idade_carro = anoAtual - ano
-
-    let ipva = 0
-    let ipvaTexto = ""
-
-
+    // cálculo do IPVA
     if (idade_carro >= 20) {
-        ipvaTexto = "Isento"
-        item.classList.add("isento")
+        ipvaTexto = "Isento";
+        item.classList.add("isento");
     } else {
         const taxa = taxas[combustivel] || 0;
-        ipva = valor * taxa
-        ipvaTexto = `R$ ${ipva.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}`
+        ipva = valor * taxa;
+
+        ipvaTexto = ipva.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
     }
 
-    const total = seguro + ipva
+    const total = seguro + ipva;
 
-    //criando lista
-
-    item.innerHTML =
-        `
+    // criando item na tela
+    item.innerHTML = `
         <hr>
 
         <p><strong>Placa:</strong> ${placa}</p>
@@ -72,20 +93,34 @@ function adicionarVeiculo() {
         <p><strong>Marca:</strong> ${marca}</p>
         <p><strong>Ano:</strong> ${ano}</p>
         <p><strong>Cor:</strong> ${cor}</p>
-        <p><strong>Seguro:</strong> R$ ${seguro.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</p>
+
+        <p><strong>Seguro:</strong> ${seguro.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        })}</p>
+
         <p><strong>IPVA:</strong> ${ipvaTexto}</p>
-        <p><strong>Total:</strong> R$ ${total.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</p>
+
+        <p><strong>Total:</strong> ${total.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        })}</p>
 
         <button class="remover">Excluir</button>
-    `
+    `;
+
+    // Criação do botão excluir
     const btnExcluir = item.querySelector(".remover");
 
     btnExcluir.addEventListener("click", function () {
         if (confirm("Tem certeza que deseja excluir esse veículo?")) {
             item.remove();
         }
-    })
-    lista.appendChild(item)
-    //limpa o formulário
-    form.reset()
+    });
+
+    // adiciona na lista
+    lista.appendChild(item);
+
+    // limpa formulário
+    form.reset();
 }
